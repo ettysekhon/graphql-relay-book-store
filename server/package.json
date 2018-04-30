@@ -1,0 +1,20 @@
+{
+  "name": "graphql-relay-book-store-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "graphql-relay": "^0.5.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}

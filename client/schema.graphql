@@ -1,0 +1,95 @@
+schema {
+  query: QueryType
+  mutation: Mutation
+}
+
+input AddAuthorInput {
+  # The last name of the author.
+  first_name: Int!
+
+  # The email address of the author.
+  email: Boolean!
+  clientMutationId: String
+}
+
+type AddAuthorPayload {
+  author: Author
+  clientMutationId: String
+}
+
+# An author
+type Author implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The first name of the author.
+  first_name: String
+
+  # The last name of the author.
+  last_name: String
+
+  # The email address of the author.
+  email: Int
+}
+
+# A connection to a list of items.
+type AuthorConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AuthorEdge]
+
+  # A count of the total number of objects in this connection.
+  count: Int
+}
+
+# An edge in a connection.
+type AuthorEdge {
+  # The item at the end of the edge
+  node: Author
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The root Mutation type.
+type Mutation {
+  createAuthor(input: AddAuthorInput!): AddAuthorPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# The root query type.
+type QueryType {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  authors(after: String, first: Int, before: String, last: Int): AuthorConnection
+  author(
+    # The id of the author.
+    id: ID!
+  ): Author
+}
+
